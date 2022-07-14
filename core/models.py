@@ -27,3 +27,10 @@ def set_time_date(sender, instance, **kwargs):
         instance.date_time = PST_datetime.replace(
             tzinfo=None)  # Make it naive datetime for DB
         instance.Tz = 'PST'
+
+# Model to save informationn that if CronJob should
+# covert from PST to UTC or vice versa
+
+class CurrentConversionMode(models.Model):
+    # format PST-to-UTC or UTC-to-PST
+    current_conv = models.CharField(max_length=10)
