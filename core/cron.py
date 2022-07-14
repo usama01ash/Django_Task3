@@ -3,17 +3,18 @@ from datetime import timedelta
 
 from django.core.exceptions import EmptyResultSet
 
-from models import CurrentConversionMode, DateTimeData
+from core.models import CurrentConversionMode, DateTimeData
 
 logger = logging.getLogger('django')
 
 
 def datetime_TZ_conversion():
 
+    logger.warning('CronJob converting datetime objects')
     try:
         conv_mode = CurrentConversionMode.objects.first()
         # if no conversion mode found in db then create entry with initial value PST to UTC
-        if conv_mode is None:  
+        if conv_mode is None:
             conv_mode = CurrentConversionMode()
             conv_mode.current_conv = 'PST-to-UTC'
             conv_mode.save()
