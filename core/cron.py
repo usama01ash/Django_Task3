@@ -21,7 +21,7 @@ def datetime_TZ_conversion():
         conv_to = conv_mode.current_conv[-3:]
         conv_from = conv_mode.current_conv[:3]
         try:
-            qs = DateTimeData.objects.filter(Tz=f'{conv_from}')[:5]
+            qs = DateTimeData.objects.filter(Tz=f'{conv_from}')[:10]
             ''' if no record of the requested Time zone then change the conversion mode from
              PST to UTC and vice versa 
              '''
@@ -29,7 +29,7 @@ def datetime_TZ_conversion():
                 conv_to, conv_from = conv_from, conv_to
                 conv_mode.current_conv = f'{conv_from}-to-{conv_to}'
                 conv_mode.save()
-                qs = DateTimeData.objects.filter(Tz=f'{conv_from}')[:5]
+                qs = DateTimeData.objects.filter(Tz=f'{conv_from}')[:10]
             # Timezone convesion
             for obj in qs:
                 obj.date_time = TimeZoneConv(obj.date_time, conv_to)
