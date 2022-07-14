@@ -148,3 +148,9 @@ LOGGING = {
         },
     },
 }
+
+# CronJobs Config
+
+CRONJOBS = [
+    ('*/5 * * * *', 'core.cron.datetime_TZ_conversion')
+]
